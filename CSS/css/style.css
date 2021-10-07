@@ -1,11 +1,46 @@
+:root
+{
+    --orange: orange;
+}
 *{
     text-transform: capitalize;
     box-sizing: border-box; /* force la taille de la box sans padding margin */
 }
-#wrapper
+.wrapper
 {
-    width:80%;
+    width:60%;
     margin: auto;
+}
+
+header
+{
+    background-color: lightgray;
+}
+.orange
+{
+    color:var(--orange);
+}
+
+.button
+{
+    padding: 1em;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+}
+.bg-orange
+{
+    background-color: var(--orange);
+}
+.bg-white
+{
+    background-color: white;
+}
+.border
+{
+    border:1px solid gray;
 }
 /***************
 TOP BAR
@@ -13,17 +48,17 @@ TOP BAR
 
 #top
 {
-    background-color: orange;
+    background-color: var(--orange);
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
-    height: 2em;
+    height: 2.5em;
 }
 
 #top div
 {
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-between;
 }
 #top span
 {
@@ -75,4 +110,111 @@ HEADER CONTENT
     flex-flow: row wrap;
     justify-content: space-between;
     padding-top: 5em;
+}
+
+/***************
+HEADER BOTTOM
+****************/
+
+#header-bottom
+{
+    background-color: darkblue;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+    align-items: center;
+    color: white;
+    height: 180px;
+    position: relative;
+    top:90px;
+    margin-bottom: 180px;
+}
+#header-bottom div
+{
+    display: flex;
+    flex-flow: row wrap;
+    margin-left: auto;
+}
+#header-bottom div:not(:nth-last-of-type(1)) span:first-child::after
+{
+    content: ":";
+    margin-left: 2em;
+    margin-right: 2em;
+}
+#header-bottom div div
+{
+    display: flex;
+    flex-flow: column wrap;
+}
+/***************
+COURSES MAIN
+****************/
+
+#courses-main
+{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+#courses h2
+{
+    text-align: center;
+}
+
+#courses-main .course-box
+{
+    display: flex;
+    flex-flow: column wrap;
+    min-width: 320px;
+    max-width: 32%;
+    border:1px solid lightgray;
+    border-radius: 10px;
+    margin-bottom: 2em;
+}
+#courses-main span
+{
+    border-top: 1px solid lightgray;
+}
+#courses-main img
+{
+    max-width:100%;
+    height: auto;
+}
+.course-box img:not(.course-box span img)
+{
+    min-width: 320px;
+}
+.course-box span img
+{
+    position: relative;
+    left:2em;
+    bottom:60px;
+    border:10px solid lightgray;
+}
+
+/***************
+COURSES BOTTOM
+****************/
+
+#courses-bottom
+{
+    display: flex;
+    flex-flow: row wrap;
+    position: relative;
+}
+#courses-bottom div div:first-child
+{
+    position: absolute;
+    background-color: var(--orange);
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: -10px;
+    border-radius: 8px;
+    height: 125px;
+}
+
+#courses-bottom img:not(#courses-bottom div div:first-child img)
+{
+    margin-left: 2em;
+    margin-top: 2em;
 }
