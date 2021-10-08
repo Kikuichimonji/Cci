@@ -199,10 +199,10 @@ COURSES BOTTOM
 #courses-bottom
 {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     position: relative;
 }
-#courses-bottom div div:first-child
+#course-pic  div
 {
     position: absolute;
     background-color: var(--orange);
@@ -212,9 +212,59 @@ COURSES BOTTOM
     border-radius: 8px;
     height: 125px;
 }
+#course-pic
+{
+    width:50%;
+    max-width: 400px;
+}
 
-#courses-bottom img:not(#courses-bottom div div:first-child img)
+#course-pic img:not(#course-pic div img)
 {
     margin-left: 2em;
     margin-top: 2em;
+    margin-bottom: 5em;
+    width:100%
+}
+
+#course-pic div:last-child
+{
+    background-color:white;
+    border-radius: 5px;
+    position: absolute;
+    top:300px;
+    left:100px;
+    width:250px;
+    text-align: center;
+}
+
+#course-text
+{
+    margin-left: 2em;
+    width:45%;
+}
+
+#course-text div
+{
+    display: flex;
+    flex-flow: row nowrap;
+}
+#course-text div div
+{
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+#course-text div :not(.img)
+{
+    background-color: lightgray;
+}
+
+/***************
+COURSES BOTTOM
+****************/
+
+#numbers .wrapper
+{
+    display: flex;
+    flex-flow: row wrap;
 }
