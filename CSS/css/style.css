@@ -1,10 +1,24 @@
 :root
 {
-    --orange: orange;
-}
+    --orange: #FDC800;
+    --bleu: #002147;
+}   
 *{
     text-transform: capitalize;
     box-sizing: border-box; /* force la taille de la box sans padding margin */
+}
+@font-face 
+{
+    font-family: "inter";
+    src: url("./font/Inter-VariableFont_slnt_wght.ttf");
+}
+.inter
+{
+    font-family: "inter";
+}
+.george
+{
+    font-family: Georgia;
 }
 .wrapper
 {
@@ -14,7 +28,7 @@
 
 header
 {
-    background-color: lightgray;
+    background-color: #F0F4F9;
 }
 .orange
 {
@@ -24,8 +38,8 @@ header
 .button
 {
     padding: 1em;
-    padding-right: 1.5em;
-    padding-left: 1.5em;
+    padding-right: 2em;
+    padding-left: 2em;
     border-radius: 5px;
     text-decoration: none;
     color: black;
@@ -51,7 +65,8 @@ TOP BAR
     background-color: var(--orange);
     display: flex;
     flex-flow: row nowrap;
-    height: 2.5em;
+    height: 3em;
+    font-size: 0.7em;
 }
 
 #top div
@@ -59,12 +74,14 @@ TOP BAR
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    
 }
 #top span
 {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    margin-right: 5em;
 }
 #top p
 {
@@ -77,6 +94,17 @@ TOP BAR
     list-style: none;
     align-items: center;
     margin:0;
+    margin-right: 1em;
+}
+
+
+@media all and (max-width:1200px)
+{
+    #menu img:not(#menu nav div img)
+    {
+        display:none;
+    }
+
 }
 
 /***************
@@ -88,18 +116,60 @@ HEADER MENU
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+    margin-top: 2em;
 }
-#menu nav
+#menu nav,#menu nav div
 {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    color: var(--bleu);
+}
+#menu nav div a
+{
+    margin-right: 2em;
+}
+#menu nav div img
+{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    border-radius: 5px;
 }
 #menu nav a
 {
     margin-left:50px;
+    text-decoration: none;
+    color: var(--bleu);
+    font-weight: bold;
+    font-size: 0.9em;
+}
+#menu nav div a
+{
+    font-weight: normal;
 }
 
+@media all and (max-width:1500px)
+{
+    #menu nav div a
+    {
+        margin-right: 1em;
+    }
+    #menu nav a
+    {
+        margin-left:1em;
+    }
+}
+
+@media all and (max-width:1200px)
+{
+    #menu img:not(#menu nav div img)
+    {
+        display:none;
+    }
+
+}
 /***************
 HEADER CONTENT
 ****************/
@@ -107,18 +177,45 @@ HEADER CONTENT
 #header-content
 {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
     padding-top: 5em;
 }
-
+#header-content p
+{
+    font-size: 3em;
+    font-weight: normal;
+    color: var(--bleu);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+#header-content p:first-child
+{
+    margin-bottom: 2em;
+}
+#header-content p.inter
+{
+    font-weight: bold;
+    font-size: 0.8em;
+    color: var(--bleu);
+}
+#header-content div div
+{
+    margin-top:3em;
+    color:var(--bleu);
+    font-size: 0.9em;
+}
+#header-content img
+{
+    max-height: 350px;
+}
 /***************
 HEADER BOTTOM
 ****************/
 
 #header-bottom
 {
-    background-color: darkblue;
+    background-color: var(--bleu);
     display: flex;
     flex-flow: row wrap;
     justify-content: start;
@@ -128,6 +225,15 @@ HEADER BOTTOM
     position: relative;
     top:90px;
     margin-bottom: 180px;
+    border-radius: 10px;
+    padding-right: 2em;
+}
+#header-bottom p
+{
+    font-weight: bold;
+    font-size: 1.5em;
+    max-width: 350px;
+    margin-left: 1em;
 }
 #header-bottom div
 {
@@ -138,13 +244,26 @@ HEADER BOTTOM
 #header-bottom div:not(:nth-last-of-type(1)) span:first-child::after
 {
     content: ":";
-    margin-left: 2em;
-    margin-right: 2em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+#header-bottom div span:first-child
+{
+    min-width: 130px;
 }
 #header-bottom div div
 {
     display: flex;
     flex-flow: column wrap;
+}
+#header-bottom div span:first-child
+{
+    font-size: 3em;
+    font-weight: bold;
+}
+#header-bottom div span:last-child
+{
+    font-size: 0.6em;
 }
 /***************
 COURSES MAIN
@@ -159,6 +278,8 @@ COURSES MAIN
 #courses h2
 {
     text-align: center;
+    color:var(--bleu);
+    font-size: 2.5em;
 }
 
 #courses-main .course-box
@@ -166,19 +287,21 @@ COURSES MAIN
     display: flex;
     flex-flow: column wrap;
     min-width: 320px;
-    max-width: 32%;
-    border:1px solid lightgray;
+    max-width: 30%;
+    border:1px solid #BDBDBD;
     border-radius: 10px;
     margin-bottom: 2em;
 }
 #courses-main span
 {
-    border-top: 1px solid lightgray;
+    border-top: 1px solid #BDBDBD;
+    max-height: 140px;
 }
 #courses-main img
 {
     max-width:100%;
     height: auto;
+    object-fit: fill;
 }
 .course-box img:not(.course-box span img)
 {
@@ -189,8 +312,26 @@ COURSES MAIN
     position: relative;
     left:2em;
     bottom:60px;
-    border:10px solid lightgray;
+    border:10px solid #F0F4F9;
 }
+.course-box span p
+{
+    position: relative;
+    bottom:60px;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+.course-box span p:first-of-type
+{
+    color:var(--bleu);
+    font-weight: bold;
+}
+.course-box span p:last-of-type
+{
+    color:#757575;
+    font-size: 0.7em;
+}
+
 
 /***************
 COURSES BOTTOM
@@ -202,7 +343,7 @@ COURSES BOTTOM
     flex-flow: row nowrap;
     position: relative;
 }
-#course-pic  div
+#course-pic  div:not(#course-pic div:last-child)
 {
     position: absolute;
     background-color: var(--orange);
@@ -235,14 +376,51 @@ COURSES BOTTOM
     left:100px;
     width:250px;
     text-align: center;
+    height: 50px;
+    padding-top: 1em;
+    padding-bottom: 3em;
+    box-shadow:0 5px 5px rgba(241,241,241,0.5) ;
+}
+
+#course-pic div:last-child p
+{
+    padding-top:0;
+    margin: 0;
+}
+#course-pic div:last-child p:first-of-type
+{
+    font-weight: bold;
+}
+#course-pic div:last-child p:last-of-type
+{
+    font-size: 0.6em;
+    color:#757575;
 }
 
 #course-text
 {
-    margin-left: 2em;
-    width:45%;
+    margin-left: 3em;
+    width:50%;
+}
+#course-text p
+{
+    font-size:0.8em;
+}
+#course-text p:first-of-type:not(#course-text div p)
+{
+    font-size: 2.5em;
+    font-weight: bold;
+    color:var(--bleu);
+    margin-bottom: 0;
 }
 
+#course-text p:last-of-type
+{
+    font-size: 0.8em;
+    font-weight: bold;
+    color:var(--bleu);
+    margin-bottom: 0;
+}
 #course-text div
 {
     display: flex;
@@ -252,18 +430,140 @@ COURSES BOTTOM
 {
     flex-flow: column wrap;
     justify-content: center;
+    margin-top: 1em;
 }
 
 #course-text div :not(.img)
 {
-    background-color: lightgray;
+    background-color: #F0F4F9;
+    width: 100%;
+}
+#course-text div p
+{
+    margin-left: 1em;
+    max-width: 400px;
+}
+#course-text div p:first-of-type
+{
+    font-weight: bold;
+    color:var(--bleu);
+    margin-bottom: 0.5em;
+    margin-top: 0;
+}
+#course-text div p:last-of-type
+{
+    font-weight: normal;
+    color:#757575;
+    margin-top: 0;
+}
+
+
+/***************
+NUMBERS
+****************/
+
+#numbers
+{
+    background-color: #F0F4F9;
+}
+#numbers .wrapper
+{
+    display: flex;
+    flex-flow: row wrap;
+    background: url("../img/map.png") no-repeat center ;
+    justify-content: space-evenly;
+    padding-top: 4.5em;
+    padding-bottom: 4.5em;
+}
+#numbers p
+{
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+}
+#numbers p:first-of-type
+{
+    font-family: Georgia;
+    font-size: 3em;
+}
+#numbers p:last-of-type
+{
+    font-family: "inter";
+    font-size:0.9em;
+    color:#00B2B2;
 }
 
 /***************
-COURSES BOTTOM
+SUBSCRIBE
 ****************/
 
-#numbers .wrapper
+#subscribe 
+{
+    margin: auto;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#subscribe  div
+{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+
+/***************
+FOOTER
+****************/
+
+footer
+{
+    background-color: var(--bleu);
+    color: white;
+}
+footer a
+{
+    text-decoration: none;
+    color:white;
+}
+footer .subwrap
+{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+footer .subwrap div:not(#botfoot):not(:first-child)
+{
+    display: flex;
+    flex-flow: row wrap;
+}
+footer ul
+{
+    list-style: none;
+    margin-right: 5em;
+}
+footer ul li
+{
+    margin-top: 1em;
+}
+footer #botfoot
+{
+    background-color: var(--orange);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    color: var(--bleu);
+}
+footer #botfoot div
+{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 2em;
+}
+footer #botfoot p
+{
+    margin-left: 2em;
+}
+#footul
 {
     display: flex;
     flex-flow: row wrap;
