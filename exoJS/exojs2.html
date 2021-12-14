@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Find the number</title>
+</head>
+<body>
+    <h1>Le juste nombre</h1>
+    <table id="scoreboard">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Time (seconds)</th>
+                <th>Number to find</th>
+                <th>Tries</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <button>démarrer</button>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    class Game {
+        constructor() {
+            let retry = true;
+            do {
+                let randomNumber = Math.floor(Math.random() * 10000) + 1;
+                let time = (new Date()).getSeconds();
+                let tries = this.play(randomNumber)
+                time = (new Date()).getSeconds() - time;
+
+                this.writeScore2(randomNumber, tries, time);
+                retry = confirm('Do you want to play again?');
+            } while (retry);
+            this.clickEvent();
+            this.colorizeScores();
+            this.insertAverage();
+        }
+        play(randomNumber) {
+            let userInput;
+            let numberOfTries = 0;
+            // Debugging
+            console.log(randomNumber);
+            do {
+                userInput = prompt('Enter a number between 1 and 10000',randomNumber);
+                if (userInput > randomNumber) {
+                    alert('Too high');
+                } else if (userInput < randomNumber) {
+                    alert('Too low');
+                }
+                numberOfTries++;
+            } while (userInput != randomNumber);
+            alert(`You've guessed the number in ${numberOfTries} tries`);
+            return numberOfTries;
+        }
+        writeScore(randomNumber, tries, time) {
+            let name = prompt('Enter your name',"moi");
+            let tr = `
+                <tr>
+                    <td>${name}</td>
+                    <td>${time}</td>
+                    <td>${randomNumber}</td>
+                    <td>${tries}</td>
+                </tr>
+            `;
+            $("#scoreboard tbody").html += tr;
+        }
+        writeScore2(randomNumber, tries, time) {
+            let tdName = $("<td></td>").text(prompt('Enter your name',"Moi"));
+            let tdTime = $("<td></td>").text(time);
+            let tdNumber = $("<td></td>").text(randomNumber);
+            let tdTries = $("<td></td>").text(tries);
+
+            $("#scoreboard tbody").append($("<tr></tr>").append([tdName,tdTime,tdNumber,tdTries]));
+        }
+        clickEvent() {
+            $("#scoreboard tbody").on("click","tr",e =>
+            {
+                if(e.target.parentNode.id != "average"){
+                    let prevActive = $(".active")[0];
+                    if(prevActive){
+                        if($(prevActive).attr("data-previous-color") != "rgba(0, 0, 0, 0)"){
+                            $(prevActive).css("background-color",$(prevActive).attr("data-previous-color"))
+                        }else{
+                            $(prevActive).css("background-color","white");
+                        }
+                        $(prevActive).removeClass("active");
+                    }
+                    $(e.target.parentNode).addClass("active");
+                    $(e.target.parentNode).attr("data-previous-color",$(e.target.parentNode).css("background-color"))
+                    $(e.target.parentNode).css("background-color","orange");
+                }
+            })
+        }
+
+        insertAverage() {
+            if($("#average")){
+                $("#average").remove()
+            }
+            let average = $("#scoreboard tbody")
+            let averageTries = 0;
+            let averageTime = 0;
+            let scores = $("#scoreboard tbody tr")
+            $(scores).each((index,el) =>{
+                averageTime += parseInt($(el).find("td:eq(1)").html())
+                averageTries += parseInt($(el).find("td:eq(3)").html())
+            })
+
+            averageTime = averageTime / scores.length;
+            averageTries = averageTries / scores.length;
+            average.append(`<tr id="average">
+                <td>Average</td>
+                <td>${averageTime}</td>
+                <td></td>
+                <td>${averageTries}</td>
+                </tr>"`);
+        }
+        colorizeScores() {
+            let highscores = $("#scoreboard tbody tr")
+            let highscoresArray = Array.from(highscores);
+            highscoresArray.sort(function (a, b) {
+                let bScore = parseInt(b.querySelector('td:nth-child(4)').innerHTML);
+                let aScore = parseInt(a.querySelector('td:nth-child(4)').innerHTML);
+                return aScore - bScore
+            })
+            
+            if($(".high"))
+            {
+                $(".high").css("background-color","white")
+                $(".high").removeClass("high")
+                
+            }
+            if($(".low"))
+            {
+                $(".low").css("background-color","white")
+                $(".low").removeClass("low")
+            }
+
+            highscoresArray[0].closest('tr').style.backgroundColor = '#00ff00';
+            highscoresArray[0].closest('tr').classList.add("high")
+            highscoresArray[highscoresArray.length - 1].closest('tr').style.backgroundColor = '#ff0000';
+            highscoresArray[highscoresArray.length - 1].closest('tr').classList.add("low")
+        }
+    }
+
+    document.getElementsByTagName("button")[0].addEventListener("click",function(e){
+        let game = new Game();
+    })
+    /*setInterval(function(){
+        document.getElementsByTagName("body")[0].style.backgroundColor = "rgb("+ Math.floor(Math.random()*255)+"," + Math.floor(Math.random()*255)+","+ Math.floor(Math.random()*255)+")"
+    },1000)*/
+    document.addEventListener("keydown",e =>{
+        if(e.key=="ArrowLeft"){
+            document.getElementsByTagName("h1")[0].style.backgroundColor = "rgb("+ Math.floor(Math.random()*255)+"," + Math.floor(Math.random()*255)+","+ Math.floor(Math.random()*255)+")"
+        }
+        if(e.key=="ArrowRight"){
+            document.getElementsByTagName("table")[0].style.backgroundColor = "rgb("+ Math.floor(Math.random()*255)+"," + Math.floor(Math.random()*255)+","+ Math.floor(Math.random()*255)+")"
+        }
+    })
+
+    document.addEventListener("keyup",e =>{
+        if(e.key=="ArrowLeft"){
+            document.getElementsByTagName("h1")[0].style.backgroundColor = "white"
+        }
+        if(e.key=="ArrowRight"){
+            document.getElementsByTagName("table")[0].style.backgroundColor = "white"
+        }
+    })
+</script>
+</html>
